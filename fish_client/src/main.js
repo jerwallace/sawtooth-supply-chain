@@ -50,8 +50,8 @@ const Layout = {
 
 const loggedInNav = () => {
   const links = [
-    ['/create', 'Add Fish'],
-    ['/fish', 'View Fish'],
+    ['/create', 'Add Container'],
+    ['/container', 'View Container'],
     ['/agents', 'View Agents']
   ]
   return m(navigation.Navbar, {}, [
@@ -63,7 +63,7 @@ const loggedInNav = () => {
 
 const loggedOutNav = () => {
   const links = [
-    ['/fish', 'View Fish'],
+    ['/container', 'View Container'],
     ['/agents', 'View Agents']
   ]
   return m(navigation.Navbar, {}, [
@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '/agents/:publicKey': resolve(AgentDetailPage),
     '/agents': resolve(AgentList),
     '/create': resolve(AddFishForm, true),
-    '/fish/:recordId': resolve(FishDetail),
-    '/fish': resolve(FishList),
+    '/container/:recordId': resolve(FishDetail),
+    '/container': resolve(FishList),
     '/login': resolve(LoginForm),
     '/logout': { onmatch: logout },
     '/profile': { onmatch: profile },

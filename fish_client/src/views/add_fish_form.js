@@ -61,7 +61,7 @@ const AddFishForm = {
                  _handleSubmit(vnode.attrs.signingKey, vnode.state)
                }
              },
-             m('legend', 'Track New Fish'),
+             m('legend', 'Track New Container'),
              _formGroup('Serial Number', m('input.form-control', {
                type: 'text',
                oninput: m.withAttr('value', (value) => {
@@ -186,13 +186,8 @@ const _updateReporters = (vnode, reporterIndex) => {
 const _handleSubmit = (signingKey, state) => {
   const recordPayload = payloads.createRecord({
     recordId: state.serialNumber,
-    recordType: 'fish',
+    recordType: 'container',
     properties: [
-      {
-        name: 'species',
-        stringValue: state.species,
-        dataType: payloads.createRecord.enum.STRING
-      },
       {
         name: 'length',
         numberValue: parsing.toInt(state.lengthInCM),
@@ -224,7 +219,7 @@ const _handleSubmit = (signingKey, state) => {
     }))
 
   transactions.submit([recordPayload].concat(reporterPayloads), true)
-    .then(() => m.route.set(`/fish/${state.serialNumber}`))
+    .then(() => m.route.set(`/container/${state.serialNumber}`))
 }
 
 /**

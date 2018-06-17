@@ -1,12 +1,7 @@
 [
   {
-    "name": "fish",
+    "name": "container",
     "properties": [
-        {
-          "name": "species",
-          "dataType": 4,
-          "required": true
-        },
         {
           "name": "length",
           "dataType": 3,

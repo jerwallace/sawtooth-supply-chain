@@ -2,13 +2,8 @@
   "records": [
     {
       "recordId": "1-4m-4-f1sh",
-      "recordType": "fish",
+      "recordType": "container",
       "properties": [
-          {
-            "name": "species",
-            "dataType": 4,
-            "stringValue": "BFT"
-          },
           {
             "name": "length",
             "dataType": 3,
@@ -36,13 +31,8 @@
 
     {
       "recordId": "1-4m-sm0l-f1sh",
-      "recordType": "fish",
+      "recordType": "container",
       "properties": [
-          {
-            "name": "species",
-            "dataType": 4,
-            "stringValue": "STV"
-          },
           {
             "name": "length",
             "dataType": 3,
@@ -67,13 +57,8 @@
 
     {
       "recordId": "1-4m-n0t-f1sh",
-      "recordType": "fish",
+      "recordType": "container",
       "properties": [
-          {
-            "name": "species",
-            "dataType": 4,
-            "stringValue": "SPW"
-          },
           {
             "name": "length",
             "dataType": 3,
