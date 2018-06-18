@@ -271,13 +271,12 @@ class TestSupplyChain(unittest.TestCase):
             Subsequent attempts to create a type with that name will
             fail.
             ''',
-            ['species', 'weight', 'temperature',
+            [ 'weight', 'temperature',
              'location', 'is_trout', 'how_big'])
 
         self.assert_valid(
             jin.create_record_type(
                 'fish',
-                ('species', PropertySchema.STRING, { 'required': True }),
                 ('weight', PropertySchema.NUMBER, { 'required': True }),
                 ('temperature', PropertySchema.NUMBER,
                  { 'number_exponent': -3, 'delayed': True }),
@@ -318,101 +317,14 @@ class TestSupplyChain(unittest.TestCase):
             This time, Jin's attempt to create a record failed because
             he neglected to include initial property values for the
             record type's require properties. In this case, a `fish`
-            record cannot be created without value for the properties
-            `species` and `weight`.
+            record cannot be created without value for the properties `weight`.
             ''')
 
         self.assert_invalid(
             jin.create_record(
-                'fish-456',
-                'fish',
-                {'species': 'trout', 'weight': 'heavy'}))
-
-        self.narrate(
-            '''
-            Jin gave the value 'heavy' for the property `weight`, but the
-            type for that property is required to be int. When he
-            provides a string value for `species` and an int value for
-            `weight`, the record can be successfully created.
-            ''')
-
-        self.assert_invalid(
-            jin.create_record(
-                'fish-456',
-                'fish',
-                {'species': 'trout', 'how_big': Enum('small')}))
-
-        self.narrate(
-            '''
-            Jin gave the value 'small' for 'how_big', but only 'big', 'bigger',
-            and 'biggest' are valid options for this enum.
-            ''')
-
-        self.assert_invalid(
-            jin.create_record(
-                'fish-456',
-                'fish',
-                {'species': 'trout', 'location': {
-                    'hemisphere': 'north',
-                    'gps': {'lat': 45, 'long': 45}
-                }}))
-
-        self.narrate(
-            '''
-            Jin used the keys "lat" and "long" for the gps, but the schema
-            specified "latitude" and "longitude".
-            ''')
-
-        self.assert_invalid(
-            jin.create_record(
-                'fish-456',
-                'fish',
-                {'species': 'trout', 'weight': 5,
-                 'temperature': -1000}))
-
-        self.narrate(
-            '''
-            Jin gave an initial value for temperature, but temperature is a
-            "delayed" property, and may not be set at creation time.
-            ''')
-
-        self.assert_valid(
-            jin.create_record(
-                'fish-456',
-                'fish',
-                {'species': 'trout', 'weight': 5,
-                 'is_trout': True, 'how_big': Enum('bigger'),
-                 'location': {
-                    'hemisphere': 'north',
-                    'gps': {'longitude': 45, 'latitude': 45}}}))
-
-        self.narrate(
-            '''
-            Jin updates the fish record's temperature. Updates, of
-            course, can only be made to the type-specified properties
-            of existing records, and the type of the update value must
-            match the type-specified type.
-            ''')
-
-        self.assert_valid(
-            jin.update_properties(
-                'fish-456',
-                {'temperature': -1414}))
-
-        self.assert_invalid(
-            jin.update_properties(
-                'fish-456',
-                {'temperature': '-1414'}))
-
-        self.assert_invalid(
-            jin.update_properties(
-                'fish-456',
-                {'splecies': 'tluna'}))
-
-        self.assert_invalid(
-            jin.update_properties(
-                'fish-???',
-                {'species': 'flounder'}))
+                'container-456',
+                'container',
+                { 'weight': 'heavy'}))
 
         self.narrate(
             '''
@@ -857,7 +769,7 @@ class TestSupplyChain(unittest.TestCase):
         self.assertEqual(get_record['owner'], sun.public_key)
         self.assertEqual(get_record['recordId'], 'fish-456')
 
-        for attr in ('species',
+        for attr in (
                      'temperature',
                      'weight',
                      'is_trout',

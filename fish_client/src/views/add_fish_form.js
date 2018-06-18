@@ -69,14 +69,6 @@ const AddFishForm = {
                }),
                value: vnode.state.serialNumber
              })),
-             _formGroup('Species (ASFIS 3-letter code)', m('input.form-control', {
-               type: 'text',
-               oninput: m.withAttr('value', (value) => {
-                 vnode.state.species = value
-               }),
-               value: vnode.state.species
-             })),
-
              layout.row([
                _formGroup('Length (m)', m('input.form-control', {
                  type: 'number',

@@ -33,7 +33,7 @@ const FishList = {
     vnode.state.currentPage = 0
 
     const refresh = () => {
-      api.get('records?recordType=fish').then((records) => {
+      api.get('records?recordType=container').then((records) => {
         vnode.state.records = records
         vnode.state.records.sort((a, b) => {
           return getLatestPropertyUpdateTime(b) - getLatestPropertyUpdateTime(a)
@@ -58,7 +58,6 @@ const FishList = {
         m(Table, {
           headers: [
             'Serial Number',
-            'Species',
             'Added',
             'Updated',
             'Updates'
@@ -67,10 +66,9 @@ const FishList = {
             vnode.state.currentPage * PAGE_SIZE,
             (vnode.state.currentPage + 1) * PAGE_SIZE)
                 .map((rec) => [
-                  m(`a[href=/fish/${rec.recordId}]`, {
+                  m(`a[href=/container/${rec.recordId}]`, {
                     oncreate: m.route.link
                   }, truncate(rec.recordId, { length: 32 })),
-                  getPropertyValue(rec, 'species'),
                   // This is the "created" time, synthesized from properties
                   // added on the initial create
                   formatTimestamp(getOldestPropertyUpdateTime(rec)),
